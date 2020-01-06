@@ -1,5 +1,7 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
+
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord
+
 
 class EventListSerializer(serializers.ModelSerializer):
     user_name = serializers.SerializerMethodField()
