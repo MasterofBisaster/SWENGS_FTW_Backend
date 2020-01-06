@@ -3,16 +3,34 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+
+class Category(models.Model):
+    title = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class Location(models.Model):
+    name = models.TextField()
+    street = models.TextField(null=True)
+    zip_code = models.PositiveIntegerField(max_length=5, null=True)
+    country = models.TextField(null=True)
+    max_user = models.PositiveIntegerField(null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     name = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    private = models.BooleanField(null=True)
-    location = models.TextField()
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'events')
+    private = models.BooleanField()
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name= 'events')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name= 'events')
     description = models.TextField()
-    max_users = models.PositiveIntegerField()
+    max_users = models.PositiveIntegerField(null=True)
     confirmed_users = models.ManyToManyField('User', related_name='attending_events', blank=True)
     costs = models.PositiveIntegerField(null=True)
 
@@ -28,32 +46,14 @@ class FTWUser(models.Model):
         return self.user
 
 
-class Location(models.Model):
-    name = models.TextField()
-    street = models.TextField()
-    zip_code = models.PositiveIntegerField(max_length=5, null=True)
-    country = models.TextField()
-    max_user = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.name
-
-
 class Comment(models.Model):
-    event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    create_date = models.DateField()
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='comments')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    content = models.TextField(max_length=500)
+    create_date = models.DateTimeField()
 
     def __str__(self):
-        return self.creator
-
-
-class Category(models.Model):
-    title = models.TextField()
-
-    def __str__(self):
-        return self.title
+        return self.creator.name + ': ' + self.content
 
 
 class FTWWord(models.Model):
@@ -63,6 +63,7 @@ class FTWWord(models.Model):
         ('w', 'W')
     )
     word = models.TextField()
+    word_category = models.CharField(max_length=1, choices=CHOICES)
 
     def __str__(self):
         return self.word
