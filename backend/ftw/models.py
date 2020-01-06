@@ -13,7 +13,7 @@ class Category(models.Model):
 class Location(models.Model):
     name = models.TextField()
     street = models.TextField(null=True)
-    zip_code = models.PositiveIntegerField(max_length=5, null=True)
+    zip_code = models.PositiveIntegerField(null=True)
     country = models.TextField(null=True)
     max_user = models.PositiveIntegerField(null=True)
 
@@ -31,7 +31,7 @@ class Event(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name= 'events')
     description = models.TextField()
     max_users = models.PositiveIntegerField(null=True)
-    confirmed_users = models.ManyToManyField('User', related_name='attending_events', blank=True)
+    confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
     costs = models.PositiveIntegerField(null=True)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Event(models.Model):
 
 class FTWUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    friends = models.ManyToManyField('User', blank=True)
+    friends = models.ManyToManyField(User, blank=True, related_name='friends')
 
     def __str__(self):
         return self.user

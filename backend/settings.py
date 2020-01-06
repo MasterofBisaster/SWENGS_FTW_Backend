@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -26,6 +28,12 @@ SECRET_KEY = '5&49fc!z#*3=-g&-bmv^6hnsshek^2_jrkv!!624b+@ec%8a#g'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+def custom_jwt_payload_handler(user):
+    from rest_framework_jwt.utils import jwt_payload_handler
+    jwt_paylout = jwt_payload_handler(user)
+    jwt_paylout['permissions'] = dict.fromkeys(user.get_all_permissions())
+    return jwt_paylout
 
 
 # Application definition
@@ -119,3 +127,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
+    'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}

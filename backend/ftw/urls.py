@@ -26,14 +26,14 @@ urlpatterns = [
     path('event/<int:pk>/delete', views.event_delete),
 
     # LOCATION
-    path('location/list', views.location_list),
+    #path('location/list', views.location_list),
     path('location/create', views.location_form_create),
     path('location/<int:pk>/get', views.location_form_get),
     path('location/<int:pk>/update', views.location_form_update),
     path('location/<int:pk>/delete', views.location_delete),
 
     #CATEGORY
-    path('category/list', views.category_list),
+    #path('category/list', views.category_list),
     path('category/create', views.category_form_create),
     path('category/<int:pk>/get', views.category_form_get),
     path('category/<int:pk>/update', views.category_form_update),
