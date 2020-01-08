@@ -1,13 +1,17 @@
 from django.contrib.auth.decorators import permission_required
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.http import HttpResponse
 from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
+from rest_framework import views
 
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
 ######################################### Event ##################################################
 
@@ -324,3 +328,44 @@ def ftwword_delete(request, pk):
         return Response({'error': 'FTWWord does not exist.'}, status=404)
     ftwword.delete()
     return Response(status=204)
+
+######################################### Media ##################################################
+
+class FileUploadView(views.APIView):
+    parser_classes = [MultiPartParser]
+
+    def post(self, request, format=None):
+        file = request.FILES['file']
+        file_input = {
+            'original_file_name': file.name,
+            'content_type': file.content_type,
+            'size': file.size,
+        }
+        serializer = MediaSerializer(data=file_input)
+        if serializer.is_valid():
+            serializer.save()
+            default_storage.save('media/' + str(serializer.data['id']), ContentFile(file.read()))
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+
+def media_download(request, pk):
+    media = Media.objects.get(pk=pk)
+    data = default_storage.open('media/' + str(pk)).read()
+    content_type = media.content_type
+    response = HttpResponse(data, content_type=content_type)
+    original_file_name =media.original_file_name
+    response['Content-Disposition'] = 'inline; filename=' + original_file_name
+    return response
+
+
+@swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
+@api_view(['GET'])
+def media_get(request, pk):
+    try:
+        media = Media.objects.get(pk=pk)
+    except Media.DoesNotExist:
+        return Response({'error': 'Media does not exist.'}, status=404)
+
+    serializer = MediaSerializer(media)
+    return Response(serializer.data)

@@ -4,8 +4,14 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Media(models.Model):
+    original_file_name = models.TextField()
+    content_type = models.TextField()
+    size = models.PositiveIntegerField()
+
 class Category(models.Model):
     title = models.TextField()
+    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
@@ -16,6 +22,7 @@ class Location(models.Model):
     zip_code = models.PositiveIntegerField(null=True)
     country = models.TextField(null=True)
     max_user = models.PositiveIntegerField(null=True)
+    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -33,6 +40,7 @@ class Event(models.Model):
     max_users = models.PositiveIntegerField(null=True)
     confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
     costs = models.PositiveIntegerField(null=True)
+    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -41,6 +49,7 @@ class Event(models.Model):
 class FTWUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
+    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.user

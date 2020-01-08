@@ -6,6 +6,8 @@ from drf_yasg.views import get_schema_view
 from rest_framework_jwt.views import obtain_jwt_token
 
 from django.contrib import admin
+
+from backend.ftw.views import FileUploadView
 from . import views
 
 schema_view = get_schema_view(
@@ -49,4 +51,8 @@ urlpatterns = [
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     url(r'^api-token-auth/', obtain_jwt_token),
+
+    url(r'^media$', FileUploadView.as_view()),
+    path('media/<int:pk>', views.media_download),
+    path('media/<int:pk>/get', views.media_get),
 ]

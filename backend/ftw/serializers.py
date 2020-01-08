@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
 
 class EventListSerializer(serializers.ModelSerializer):
@@ -47,4 +47,8 @@ class FTWWordFormSerializer(serializers.ModelSerializer):
         model = FTWWord
         fields = '__all__'
 
+class MediaSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Media
+        fields = '__all__'
