@@ -62,7 +62,7 @@ class Comment(models.Model):
     create_date = models.DateTimeField()
 
     def __str__(self):
-        return self.creator.name + ': ' + self.content
+        return self.creator.username + ': ' + self.content
 
 
 class FTWWord(models.Model):
