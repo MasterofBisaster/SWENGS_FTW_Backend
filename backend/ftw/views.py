@@ -142,13 +142,13 @@ def location_delete(request, pk):
 
 ######################################### Comment ##################################################
 
-#@swagger_auto_schema(method='GET', responses={200: CommentListSerializer(many=True)})
-#@api_view(['GET'])
-#@permission_required('ftw.view_comment', raise_exception=True)
-#def comment_list(request):
-#    comments = Comment.objects.all()
-#    serializer = CommentListSerializer(comments, many=True)
-#    return Response(serializer.data)
+@swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_comment', raise_exception=True)
+def comment_list(request):
+    comments = Comment.objects.all()
+    serializer = CommentFormSerializer(comments, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='POST', request_body=CommentFormSerializer, responses={200: CommentFormSerializer()})
