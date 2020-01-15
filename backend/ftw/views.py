@@ -268,13 +268,13 @@ def category_delete(request, pk):
 
 ######################################### FTWWort ##################################################
 
-#@swagger_auto_schema(method='GET', responses={200: FTWWordListSerializer(many=True)})
-#@api_view(['GET'])
-#@permission_required('ftw.view_ftwword', raise_exception=True)
-#def ftwword_list(request):
-#    ftwwords = FTWWord.objects.all()
-#    serializer = FTWWordListSerializer(ftwwords, many=True)
-#    return Response(serializer.data)
+@swagger_auto_schema(method='GET', responses={200: FTWWordFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_ftwword', raise_exception=True)
+def ftwword_list(request):
+    ftwwords = FTWWord.objects.all()
+    serializer = FTWWordFormSerializer(ftwwords, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='POST', request_body=FTWWordFormSerializer, responses={200: FTWWordFormSerializer()})

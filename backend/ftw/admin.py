@@ -32,6 +32,9 @@ class FTWWordAdmin(admin.ModelAdmin):
 
     pass
 
+class MediaAdmin(admin.ModelAdmin):
+
+    pass
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Location, LocationAdmin)
@@ -39,3 +42,4 @@ admin.site.register(Event, EventAdmin)
 admin.site.register(FTWUser, FTWUserAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(FTWWord, FTWWordAdmin)
+admin.site.register(Media, MediaAdmin)
