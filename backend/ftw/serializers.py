@@ -12,10 +12,10 @@ class EventListSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'start_date', 'end_date', 'user_name', 'category_name']
 
     def get_user_name(self, obj):
-        return obj.user.username if obj.user else ''
+        return obj.creator.username if obj.creator else ''
 
     def get_category_name(self, obj):
-        return obj.category.name if obj.category else ''
+        return obj.category.title if obj.category else ''
 
 class EventFormSerializer(serializers.ModelSerializer):
 
