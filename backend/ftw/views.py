@@ -13,6 +13,7 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
+
 ######################################### Event ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
@@ -76,13 +77,14 @@ def event_delete(request, pk):
     event.delete()
     return Response(status=204)
 
+
 ######################################### Location ##################################################
 
 
-#@swagger_auto_schema(method='GET', responses={200: LocationListSerializer(many=True)})
-#@api_view(['GET'])
-#@permission_required('ftw.view_location', raise_exception=True)
-#def location_list(request):
+# @swagger_auto_schema(method='GET', responses={200: LocationListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_required('ftw.view_location', raise_exception=True)
+# def location_list(request):
 #    locations = Location.objects.all()
 #    serializer = LocationListSerializer(locations, many=True)
 #    return Response(serializer.data)
@@ -140,6 +142,7 @@ def location_delete(request, pk):
     location.delete()
     return Response(status=204)
 
+
 ######################################### Comment ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
@@ -147,6 +150,15 @@ def location_delete(request, pk):
 @permission_required('ftw.view_comment', raise_exception=True)
 def comment_list(request):
     comments = Comment.objects.all()
+    serializer = CommentFormSerializer(comments, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_comment', raise_exception=True)
+def comment_list_event(request, pk):
+    comments = Comment.objects.filter(event__pk=pk)
     serializer = CommentFormSerializer(comments, many=True)
     return Response(serializer.data)
 
@@ -203,12 +215,13 @@ def comment_delete(request, pk):
     comment.delete()
     return Response(status=204)
 
+
 ######################################### Category ##################################################
 
-#@swagger_auto_schema(method='GET', responses={200: CategoryListSerializer(many=True)})
-#@api_view(['GET'])
-#@permission_required('ftw.view_category', raise_exception=True)
-#def category_list(request):
+# @swagger_auto_schema(method='GET', responses={200: CategoryListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_required('ftw.view_category', raise_exception=True)
+# def category_list(request):
 #    categorys = Category.objects.all()
 #    serializer = CategoryListSerializer(categorys, many=True)
 #    return Response(serializer.data)
@@ -265,6 +278,7 @@ def category_delete(request, pk):
         return Response({'error': 'Category does not exist.'}, status=404)
     category.delete()
     return Response(status=204)
+
 
 ######################################### FTWWort ##################################################
 
@@ -328,6 +342,7 @@ def ftwword_delete(request, pk):
     ftwword.delete()
     return Response(status=204)
 
+
 ######################################### Media ##################################################
 
 class FileUploadView(views.APIView):
@@ -353,7 +368,7 @@ def media_download(request, pk):
     data = default_storage.open('media/' + str(pk)).read()
     content_type = media.content_type
     response = HttpResponse(data, content_type=content_type)
-    original_file_name =media.original_file_name
+    original_file_name = media.original_file_name
     response['Content-Disposition'] = 'inline; filename=' + original_file_name
     return response
 
