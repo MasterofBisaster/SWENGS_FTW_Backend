@@ -9,7 +9,7 @@ class EventListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['id', 'name', 'start_date', 'end_date', 'user_name', 'category_name']
+        fields = ['id', 'name', 'start_date', 'end_date', 'user_name', 'category_name', 'short_decription']
 
     def get_user_name(self, obj):
         return obj.creator.username if obj.creator else ''

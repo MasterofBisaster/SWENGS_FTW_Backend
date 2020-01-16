@@ -30,12 +30,13 @@ class Location(models.Model):
 
 class Event(models.Model):
     name = models.TextField()
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'events')
     private = models.BooleanField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name= 'events')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name= 'events')
+    short_description = models.TextField(max_length=50)
     description = models.TextField()
     max_users = models.PositiveIntegerField(null=True)
     confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
