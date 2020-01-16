@@ -43,6 +43,7 @@ urlpatterns = [
 
     # COMMENT
     path('comment/list', views.comment_list),
+    path('comment/list/<int:pk>', views.comment_list_event),
     path('comment/create', views.comment_form_create),
     path('comment/<int:pk>/update', views.comment_form_update),
     path('comment/<int:pk>/delete', views.comment_delete),
