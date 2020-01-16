@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework import views
 
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
 
@@ -64,6 +64,19 @@ def event_form_get(request, pk):
         return Response({'error': 'Event does not exist.'}, status=404)
 
     serializer = EventFormSerializer(event)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: EventDetailSerializer()})
+@api_view(['GET'])
+@permission_required('ftw.view_event', raise_exception=True)
+def event_detail_get(request, pk):
+    try:
+        event = Event.objects.get(pk=pk)
+    except Event.DoesNotExist:
+        return Response({'error': 'Event does not exist.'}, status=404)
+
+    serializer = EventDetailSerializer(event)
     return Response(serializer.data)
 
 
