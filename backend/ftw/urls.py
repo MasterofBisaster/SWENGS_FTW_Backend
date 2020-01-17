@@ -30,16 +30,20 @@ urlpatterns = [
     path('event/<int:pk>/detail', views.event_detail_get),
     path('event/<int:pk>/update', views.event_form_update),
     path('event/<int:pk>/delete', views.event_delete),
+    path('event/add-user/<int:event_id>/<int:user_id>', views.add_user_to_event),
+
 
     # LOCATION
-    #path('location/list', views.location_list),
+    path('location/list', views.location_list),
+    path('location/list/search/<str:searchString>', views.search_location_list),
     path('location/create', views.location_form_create),
     path('location/<int:pk>/get', views.location_form_get),
     path('location/<int:pk>/update', views.location_form_update),
     path('location/<int:pk>/delete', views.location_delete),
 
     #CATEGORY
-    #path('category/list', views.category_list),
+    path('category/list', views.category_list),
+    path('category/list/search/<str:searchString>', views.search_category_list),
     path('category/create', views.category_form_create),
     path('category/<int:pk>/get', views.category_form_get),
     path('category/<int:pk>/update', views.category_form_update),

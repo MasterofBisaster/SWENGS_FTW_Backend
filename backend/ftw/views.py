@@ -13,13 +13,13 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework import views
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 from django.db.models import Q
 
-
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, RegisterFormSerializer
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
+    RegisterFormSerializer
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
 
@@ -27,11 +27,12 @@ from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Medi
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('ftw.view_event', raise_exception=True)
+#@permission_required('ftw.view_event', raise_exception=True)
 def event_list(request):
     events = Event.objects.all()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
@@ -40,12 +41,14 @@ def public_event_list(request):
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
+
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 def search_event_list(request, searchString):
     events = Event.objects.filter(name__contains=searchString)
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
@@ -125,13 +128,21 @@ def event_delete(request, pk):
 ######################################### Location ##################################################
 
 
-# @swagger_auto_schema(method='GET', responses={200: LocationListSerializer(many=True)})
-# @api_view(['GET'])
-# @permission_required('ftw.view_location', raise_exception=True)
-# def location_list(request):
-#    locations = Location.objects.all()
-#    serializer = LocationListSerializer(locations, many=True)
-#    return Response(serializer.data)
+@swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_location', raise_exception=True)
+def location_list(request):
+    locations = Location.objects.all()
+    serializer = LocationFormSerializer(locations, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
+@api_view(['GET'])
+def search_location_list(request, searchString):
+    locations = Location.objects.filter(name__contains=searchString)
+    serializer = LocationFormSerializer(locations, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='POST', request_body=LocationFormSerializer, responses={200: LocationFormSerializer()})
@@ -262,13 +273,21 @@ def comment_delete(request, pk):
 
 ######################################### Category ##################################################
 
-# @swagger_auto_schema(method='GET', responses={200: CategoryListSerializer(many=True)})
-# @api_view(['GET'])
-# @permission_required('ftw.view_category', raise_exception=True)
-# def category_list(request):
-#    categorys = Category.objects.all()
-#    serializer = CategoryListSerializer(categorys, many=True)
-#    return Response(serializer.data)
+@swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_category', raise_exception=True)
+def category_list(request):
+    categorys = Category.objects.all()
+    serializer = CategoryFormSerializer(categorys, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer(many=True)})
+@api_view(['GET'])
+def search_category_list(request, searchString):
+    categories = Category.objects.filter(title__contains=searchString)
+    serializer = CategoryFormSerializer(categories, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='POST', request_body=CategoryFormSerializer, responses={200: CategoryFormSerializer()})
@@ -440,3 +459,15 @@ def register_form_create(request):
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(status=400)
+
+######################################### add User to Event ##################################################
+
+@swagger_auto_schema(method='POST', responses=200)
+@api_view(['POST'])
+def add_user_to_event(request, user_id, event_id):
+
+    event = Event.objects.get(pk=event_id)
+    user = User.objects.get(pk=user_id)
+    event.confirmed_users.add(user)
+    return Response(status=201)
+
