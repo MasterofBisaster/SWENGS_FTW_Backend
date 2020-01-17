@@ -9,6 +9,8 @@ from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework import views
 
+from django.db.models import Q
+
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
@@ -21,6 +23,21 @@ from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Medi
 @permission_required('ftw.view_event', raise_exception=True)
 def event_list(request):
     events = Event.objects.all()
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+def public_event_list(request):
+    events = Event.objects.filter(private=False)
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_event', raise_exception=True)
+def private_event_list(request, pk):
+    events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__friends__id=pk))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
