@@ -35,6 +35,13 @@ def public_event_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
+def search_event_list(request, searchString):
+    events = Event.objects.filter(name__contains=searchString)
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
 @permission_required('ftw.view_event', raise_exception=True)
 def private_event_list(request, pk):
     events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__friends__id=pk))
