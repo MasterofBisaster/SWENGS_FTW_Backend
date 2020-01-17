@@ -9,12 +9,14 @@ class Media(models.Model):
     content_type = models.TextField()
     size = models.PositiveIntegerField()
 
+
 class Category(models.Model):
     title = models.TextField()
     picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
+
 
 class Location(models.Model):
     name = models.TextField()
@@ -33,10 +35,10 @@ class Event(models.Model):
     name = models.TextField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'events')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events')
     private = models.BooleanField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name= 'events')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name= 'events')
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='events')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='events')
     short_description = models.TextField(max_length=50)
     description = models.TextField()
     max_users = models.PositiveIntegerField(null=True)

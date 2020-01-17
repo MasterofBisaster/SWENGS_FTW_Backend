@@ -38,10 +38,28 @@ class EventDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['id', 'name', 'start_date', 'end_date', 'user_name', 'creator',
-                  'private', 'short_description', 'location_name', 'location_street', 'location_city',
-                  'location_zip_code', 'location_country', 'location_max_user', 'max_users', 'costs', 'user_name',
-                  'category_name']
+        fields = ['id',
+                  'name',
+                  'start_date',
+                  'end_date',
+                  #
+                  'creator',
+                  'user_name',
+                  'private',
+
+                  'location_name',
+                  'location_street',
+                  'location_city',
+                  'location_zip_code',
+                  'location_country',
+                  'location_max_user',
+                  'category_name',
+
+                  'short_description',
+                  'description',
+                  'max_users',
+                  'costs',
+                  ]
 
     def get_user_name(self, obj):
         return obj.creator.username if obj.creator else ''
