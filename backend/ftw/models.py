@@ -11,7 +11,7 @@ class Media(models.Model):
 
 class Category(models.Model):
     title = models.TextField()
-    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -19,10 +19,11 @@ class Category(models.Model):
 class Location(models.Model):
     name = models.TextField()
     street = models.TextField(null=True)
+    city = models.TextField(null=True)
     zip_code = models.PositiveIntegerField(null=True)
     country = models.TextField(null=True)
     max_user = models.PositiveIntegerField(null=True)
-    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -41,7 +42,7 @@ class Event(models.Model):
     max_users = models.PositiveIntegerField(null=True)
     confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
     costs = models.PositiveIntegerField(null=True)
-    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -50,7 +51,7 @@ class Event(models.Model):
 class FTWUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
-    picture = models.OneToOneField(Media, on_delete=models.CASCADE, null=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.user
