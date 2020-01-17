@@ -6,18 +6,21 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
+from rest_framework import views
 from django.contrib.auth.models import Group
 
+from django.db.models import Q
 
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
+
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
-    RegisterFormSerializer
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, RegisterFormSerializer
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
 
 
 ######################################### Event ##################################################
@@ -27,6 +30,21 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
 @permission_required('ftw.view_event', raise_exception=True)
 def event_list(request):
     events = Event.objects.all()
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+def public_event_list(request):
+    events = Event.objects.filter(private=False)
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_event', raise_exception=True)
+def private_event_list(request, pk):
+    events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__friends__id=pk))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 

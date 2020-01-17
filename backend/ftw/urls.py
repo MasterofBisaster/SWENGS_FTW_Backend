@@ -22,6 +22,8 @@ urlpatterns = [
 
     # EVENT
     path('event/list', views.event_list),
+    path('event/list/public', views.public_event_list),
+    path('event/list/private/<int:pk>', views.private_event_list),
     path('event/create', views.event_form_create),
     path('event/<int:pk>/get', views.event_form_get),
     path('event/<int:pk>/detail', views.event_detail_get),
