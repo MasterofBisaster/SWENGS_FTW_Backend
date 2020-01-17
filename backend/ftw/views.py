@@ -1,17 +1,23 @@
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.hashers import make_password
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
-from rest_framework import views
+from django.contrib.auth.models import Group
 
-from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer
+
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
+from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
+    RegisterFormSerializer
 
 
 ######################################### Event ##################################################
@@ -396,3 +402,16 @@ def media_get(request, pk):
 
     serializer = MediaSerializer(media)
     return Response(serializer.data)
+
+
+######################################### Register ##################################################
+
+@swagger_auto_schema(method='POST', request_body=RegisterFormSerializer, responses={200: RegisterFormSerializer()})
+@api_view(['POST'])
+def register_form_create(request):
+    data = JSONParser().parse(request)
+    serializer = RegisterFormSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(status=400)

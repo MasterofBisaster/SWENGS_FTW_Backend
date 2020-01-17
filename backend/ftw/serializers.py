@@ -1,3 +1,6 @@
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
@@ -117,3 +120,20 @@ class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media
         fields = '__all__'
+
+
+class RegisterFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+    def to_internal_value(self, data):
+        # Call to super will run procedure on all of your data.
+        # From there, you can operate on just the bit you're
+        # concerned with, then return everything at the end.
+
+        values = super().to_internal_value(data)
+        values['password'] = make_password(data['password'])
+        values['groups'] = Group.objects.filter(name='user')
+        return values
