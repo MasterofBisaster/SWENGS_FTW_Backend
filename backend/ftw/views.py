@@ -280,8 +280,7 @@ def search_category_list(request, searchString):
 @api_view(['POST'])
 @permission_required('ftw.add_category', raise_exception=True)
 def category_form_create(request):
-    data = JSONParser().parse(request)
-    serializer = CategoryFormSerializer(data=data)
+    serializer = CategoryFormSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=201)
