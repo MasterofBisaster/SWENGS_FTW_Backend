@@ -60,7 +60,7 @@ urlpatterns = [
     path('ftwword/list', views.ftwword_list),
 
     # REGISTER
-    path('register/create', views.register_form_create),
+    path(r'register/create', views.register_form_create),
 
     #FTWUSER
     path('user/<int:pk>/detail', views.user_detail_get),
