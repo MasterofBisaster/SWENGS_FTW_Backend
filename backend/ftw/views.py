@@ -99,7 +99,6 @@ def event_form_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: EventDetailSerializer()})
 @api_view(['GET'])
-@permission_required('ftw.view_event', raise_exception=True)
 def event_detail_get(request, pk):
     try:
         event = Event.objects.get(pk=pk)
@@ -126,7 +125,6 @@ def event_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('ftw.view_location', raise_exception=True)
 def location_list(request):
     locations = Location.objects.all()
     serializer = LocationFormSerializer(locations, many=True)
@@ -172,7 +170,6 @@ def location_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer()})
 @api_view(['GET'])
-@permission_required('ftw.view_location', raise_exception=True)
 def location_form_get(request, pk):
     try:
         location = Location.objects.get(pk=pk)
@@ -198,7 +195,6 @@ def location_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('ftw.view_comment', raise_exception=True)
 def comment_list(request):
     comments = Comment.objects.all()
     serializer = CommentFormSerializer(comments, many=True)
@@ -207,7 +203,6 @@ def comment_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('ftw.view_comment', raise_exception=True)
 def comment_list_event(request, pk):
     comments = Comment.objects.filter(event__pk=pk)
     serializer = CommentFormSerializer(comments, many=True)
@@ -245,7 +240,6 @@ def comment_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer()})
 @api_view(['GET'])
-@permission_required('ftw.view_comment', raise_exception=True)
 def comment_form_get(request, pk):
     try:
         comment = Comment.objects.get(pk=pk)
@@ -271,7 +265,6 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer(many=True)})
 @api_view(['GET'])
-@permission_required('ftw.view_category', raise_exception=True)
 def category_list(request):
     categorys = Category.objects.all()
     serializer = CategoryFormSerializer(categorys, many=True)
@@ -317,7 +310,6 @@ def category_form_update(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer()})
 @api_view(['GET'])
-@permission_required('ftw.view_category', raise_exception=True)
 def category_form_get(request, pk):
     try:
         category = Category.objects.get(pk=pk)
