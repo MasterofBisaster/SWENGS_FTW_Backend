@@ -438,7 +438,7 @@ def media_get(request, pk):
 
 ######################################### Register ##################################################
 
-@swagger_auto_schema(method='POST', request_body=RegisterFormSerializer, responses={200: RegisterFormSerializer()})
+@swagger_auto_schema(method='POST', responses={200: RegisterFormSerializer()})
 @api_view(['POST'])
 def register_form_create(request):
     data = JSONParser().parse(request)
