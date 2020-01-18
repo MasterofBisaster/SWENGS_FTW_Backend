@@ -467,7 +467,12 @@ def register_form_create(request):
 def add_user_to_event(request, user_id, event_id):
 
     event = Event.objects.get(pk=event_id)
+    users = event.confirmed_users.all()
     user = User.objects.get(pk=user_id)
-    event.confirmed_users.add(user)
+    if user in users:
+        users = users.filter(~Q(username=user.username))
+        event.confirmed_users.set(users)
+        #event.confirmed_users.exclude(username=user.username)
+    else:
+        event.confirmed_users.add(user)
     return Response(status=201)
-
