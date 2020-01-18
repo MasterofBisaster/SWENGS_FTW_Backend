@@ -1,29 +1,26 @@
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.db.models import Q
 from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import views
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
-from rest_framework import views
-from django.contrib.auth.models import Group, User
 
-from django.db.models import Q
-
-
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
     RegisterFormSerializer, FTWUserDetailSerializer
-
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 
 
 ######################################### Event ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
-#@permission_required('ftw.view_event', raise_exception=True)
+# @permission_required('ftw.view_event', raise_exception=True)
 def event_list(request):
     events = Event.objects.all()
     serializer = EventListSerializer(events, many=True)
@@ -471,14 +468,13 @@ def user_detail_get(request, pk):
 @swagger_auto_schema(method='POST', responses=200)
 @api_view(['POST'])
 def add_user_to_event(request, user_id, event_id):
-
     event = Event.objects.get(pk=event_id)
     users = event.confirmed_users.all()
     user = User.objects.get(pk=user_id)
     if user in users:
         users = users.filter(~Q(username=user.username))
         event.confirmed_users.set(users)
-        #event.confirmed_users.exclude(username=user.username)
+        # event.confirmed_users.exclude(username=user.username)
     else:
         event.confirmed_users.add(user)
     return Response(status=201)

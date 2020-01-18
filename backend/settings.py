@@ -129,7 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 JWT_AUTH = {
-#    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
     'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
 }
