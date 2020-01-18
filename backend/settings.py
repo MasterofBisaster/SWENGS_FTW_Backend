@@ -128,19 +128,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#JWT_AUTH = {
-#    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
-#    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
-#    'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
-#}
-#
-#REST_FRAMEWORK = {
-#    'DEFAULT_PERMISSION_CLASSES': (
-#        'rest_framework.permissions.IsAuthenticated',
-#    ),
-#    'DEFAULT_AUTHENTICATION_CLASSES': (
-#        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#        'rest_framework.authentication.SessionAuthentication',
-#        'rest_framework.authentication.BasicAuthentication',
-#    ),
-#}
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
+    'JWT_PAYLOAD_HANDLER': custom_jwt_payload_handler,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
