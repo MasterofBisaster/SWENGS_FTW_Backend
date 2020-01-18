@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 
 
 class EventListSerializer(serializers.ModelSerializer):
@@ -132,7 +132,6 @@ class RegisterFormSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-
     def to_internal_value(self, data):
         # Call to super will run procedure on all of your data.
         # From there, you can operate on just the bit you're
@@ -142,3 +141,28 @@ class RegisterFormSerializer(serializers.ModelSerializer):
         values['password'] = make_password(data['password'])
         values['groups'] = Group.objects.filter(name='user')
         return values
+
+
+class FTWUserDetailSerializer(serializers.ModelSerializer):
+    user_username = serializers.SerializerMethodField()
+    user_first_name = serializers.SerializerMethodField()
+    user_last_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = FTWUser
+        fields = ['id',
+                  'picture',
+
+                  'user_username',
+                  'user_first_name',
+                  'user_last_name',
+                  ]
+
+    def get_user_username(self, obj):
+        return obj.username if obj else ''
+
+    def get_user_first_name(self, obj):
+        return obj.first_name if obj else ''
+
+    def get_user_last_name(self, obj):
+        return obj.last_name if obj else ''

@@ -56,7 +56,7 @@ class FTWUser(models.Model):
     picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Comment(models.Model):

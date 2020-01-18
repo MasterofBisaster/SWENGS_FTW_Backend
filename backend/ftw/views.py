@@ -13,14 +13,15 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework import views
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 from django.db.models import Q
 
 
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
-    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, RegisterFormSerializer
-from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media
+    CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
+    RegisterFormSerializer, FTWUserDetailSerializer
+from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 
 
 ######################################### Event ##################################################
@@ -438,5 +439,21 @@ def register_form_create(request):
     serializer = RegisterFormSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
+        newUser = User.objects.get(username=serializer.data.get("username"))
+        FTWUser.objects.create(user=newUser)
         return Response(serializer.data, status=201)
     return Response(status=400)
+
+######################################### User ##################################################
+
+
+@swagger_auto_schema(method='GET', responses={200: FTWUserDetailSerializer()})
+@api_view(['GET'])
+def user_detail_get(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except Event.DoesNotExist:
+        return Response({'error': 'User does not exist.'}, status=404)
+
+    serializer = FTWUserDetailSerializer(user)
+    return Response(serializer.data)
