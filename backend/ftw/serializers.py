@@ -95,13 +95,17 @@ class EventDetailSerializer(serializers.ModelSerializer):
 
 class CommentFormSerializer(serializers.ModelSerializer):
     user_name = serializers.SerializerMethodField()
+    user_picture = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
-        fields = ['id', 'event', 'creator', 'content', 'create_date', 'user_name']
+        fields = ['id', 'event', 'creator', 'content', 'create_date', 'user_name', 'user_picture']
 
     def get_user_name(self, obj):
         return obj.creator.username if obj.creator else ''
+
+    def get_user_picture(self, obj):
+        return obj.creator.ftw_user.picture.id if obj.creator.ftw_user.picture else ''
 
 
 class CategoryFormSerializer(serializers.ModelSerializer):
