@@ -471,7 +471,7 @@ def register_form_create(request):
 @api_view(['GET'])
 def user_detail_get(request, pk):
     try:
-        user = FTWUser.objects.get(pk=pk)
+        user = FTWUser.objects.get(user__pk=pk)
     except FTWUser.DoesNotExist:
         return Response({'error': 'FTWUser does not exist.'}, status=404)
 
