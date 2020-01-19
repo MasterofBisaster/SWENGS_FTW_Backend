@@ -66,7 +66,8 @@ urlpatterns = [
     path('user/<int:pk>/detail', views.user_detail_get),
 
     #MEDIA
-    url(r'^media$', FileUploadView.as_view()),
+    #url(r'^media$', FileUploadView.as_view()),
+    path('media/upload', views.post),
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
 

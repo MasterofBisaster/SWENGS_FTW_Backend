@@ -409,6 +409,22 @@ class FileUploadView(views.APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
+@swagger_auto_schema(method='POST', responses={200: MediaSerializer()})
+@api_view(['POST'])
+def post(request):
+    file = request.FILES['file']
+    file_input = {
+        'original_file_name': file.name,
+        'content_type': file.content_type,
+        'size': file.size,
+    }
+    serializer = MediaSerializer(data=file_input)
+    if serializer.is_valid():
+        serializer.save()
+        default_storage.save('media/' + str(serializer.data['id']), ContentFile(file.read()))
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
 
 def media_download(request, pk):
     media = Media.objects.get(pk=pk)

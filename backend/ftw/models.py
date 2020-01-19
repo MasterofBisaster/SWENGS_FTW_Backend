@@ -44,7 +44,7 @@ class Event(models.Model):
     max_users = models.PositiveIntegerField(null=True)
     confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
     costs = models.PositiveIntegerField(null=True)
-    picture = models.ManyToManyField('Media', blank=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
