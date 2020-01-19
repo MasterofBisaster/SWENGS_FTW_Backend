@@ -12,7 +12,7 @@ class Media(models.Model):
 
 class Category(models.Model):
     title = models.TextField()
-    picture = models.ManyToManyField('Media', blank=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -25,7 +25,7 @@ class Location(models.Model):
     zip_code = models.PositiveIntegerField(null=True)
     country = models.TextField(null=True)
     max_user = models.PositiveIntegerField(null=True)
-    picture = models.ManyToManyField('Media', blank=True)
+    picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
