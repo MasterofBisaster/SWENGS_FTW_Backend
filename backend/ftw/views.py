@@ -409,6 +409,7 @@ class FileUploadView(views.APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
+
 @swagger_auto_schema(method='POST', responses={200: MediaSerializer()})
 @api_view(['POST'])
 def post(request):
@@ -470,12 +471,28 @@ def register_form_create(request):
 @api_view(['GET'])
 def user_detail_get(request, pk):
     try:
-        user = User.objects.get(pk=pk)
-    except Event.DoesNotExist:
-        return Response({'error': 'User does not exist.'}, status=404)
+        user = FTWUser.objects.get(pk=pk)
+    except FTWUser.DoesNotExist:
+        return Response({'error': 'FTWUser does not exist.'}, status=404)
 
     serializer = FTWUserDetailSerializer(user)
     return Response(serializer.data)
+
+
+@swagger_auto_schema(method='PUT', request_body=FTWUserDetailSerializer, responses={200: FTWUserDetailSerializer()})
+@api_view(['PUT'])
+@permission_required('ftw.change_location', raise_exception=True)
+def user_form_update(request, pk):
+    try:
+        user = FTWUser.objects.get(pk=pk)
+    except FTWUser.DoesNotExist:
+        return Response({'error': 'FTWUser does not exist.'}, status=404)
+
+    serializer = FTWUserDetailSerializer(user, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
 
 
 ######################################### add User to Event ##################################################

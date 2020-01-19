@@ -51,7 +51,7 @@ class Event(models.Model):
 
 
 class FTWUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='ftw_user')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
     picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 

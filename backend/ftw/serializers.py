@@ -152,17 +152,16 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
         model = FTWUser
         fields = ['id',
                   'picture',
-
                   'user_username',
                   'user_first_name',
                   'user_last_name',
                   ]
 
     def get_user_username(self, obj):
-        return obj.username if obj else ''
+        return obj.user.username if obj else ''
 
     def get_user_first_name(self, obj):
-        return obj.first_name if obj else ''
+        return obj.user.first_name if obj else ''
 
     def get_user_last_name(self, obj):
-        return obj.last_name if obj else ''
+        return obj.user.last_name if obj else ''
