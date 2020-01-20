@@ -25,6 +25,7 @@ urlpatterns = [
     path('event/list/public', views.public_event_list),
     path('event/list/private/<int:pk>', views.private_event_list),
     path('event/list/search/<str:searchString>', views.search_event_list),
+    path('event/list/private/search/<str:searchString>/<int:pk>', views.private_search_event_list),
     path('event/create', views.event_form_create),
     path('event/<int:pk>/get', views.event_form_get),
     path('event/<int:pk>/detail', views.event_detail_get),
@@ -65,6 +66,7 @@ urlpatterns = [
     #FTWUSER
     path('user/<int:pk>/detail', views.user_detail_get),
     path('user/<int:pk>/update', views.user_form_update),
+    path('user/add-friend/<int:user_id>/<int:friend_id>', views.add_friend_to_user),
 
     #MEDIA
     #url(r'^media$', FileUploadView.as_view()),
