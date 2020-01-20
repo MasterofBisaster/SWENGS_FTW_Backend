@@ -9,16 +9,20 @@ from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Medi
 class EventListSerializer(serializers.ModelSerializer):
     user_name = serializers.SerializerMethodField()
     category_name = serializers.SerializerMethodField()
+    confirmed_users = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
-        fields = ['id', 'name', 'creator','start_date', 'end_date', 'user_name', 'category_name', 'short_description', 'picture']
+        fields = ['id', 'name', 'creator','start_date', 'end_date', 'user_name', 'category_name', 'short_description', 'picture', 'max_users', 'confirmed_users']
 
     def get_user_name(self, obj):
         return obj.creator.username if obj.creator else ''
 
     def get_category_name(self, obj):
         return obj.category.title if obj.category else ''
+
+    def get_confirmed_users(self, obj):
+        return obj.confirmed_users.all().count()
 
 
 class EventFormSerializer(serializers.ModelSerializer):
