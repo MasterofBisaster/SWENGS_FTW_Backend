@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
@@ -23,7 +23,6 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
-# @permission_required('ftw.view_event', raise_exception=True)
 @permission_classes([AllowAny])
 def event_list(request):
     events = Event.objects.all()
@@ -33,6 +32,7 @@ def event_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def public_event_list(request):
     events = Event.objects.filter(private=False)
     serializer = EventListSerializer(events, many=True)
@@ -41,6 +41,7 @@ def public_event_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def search_event_list(request, searchString):
     events = Event.objects.filter(Q(name__contains=searchString) & Q(private=False))
     serializer = EventListSerializer(events, many=True)
@@ -100,6 +101,7 @@ def event_form_get(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: EventDetailSerializer()})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def event_detail_get(request, pk):
     try:
         event = Event.objects.get(pk=pk)
@@ -126,6 +128,7 @@ def event_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def location_list(request):
     locations = Location.objects.all()
     serializer = LocationFormSerializer(locations, many=True)
@@ -134,6 +137,7 @@ def location_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def search_location_list(request, searchString):
     locations = Location.objects.filter(name__contains=searchString)
     serializer = LocationFormSerializer(locations, many=True)
@@ -196,6 +200,7 @@ def location_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
 @api_view(['GET'])
+
 def comment_list(request):
     comments = Comment.objects.all()
     serializer = CommentFormSerializer(comments, many=True)
@@ -204,6 +209,7 @@ def comment_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def comment_list_event(request, pk):
     comments = Comment.objects.filter(event__pk=pk)
     serializer = CommentFormSerializer(comments, many=True)
@@ -266,6 +272,7 @@ def comment_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def category_list(request):
     categorys = Category.objects.all()
     serializer = CategoryFormSerializer(categorys, many=True)
@@ -274,6 +281,7 @@ def category_list(request):
 
 @swagger_auto_schema(method='GET', responses={200: CategoryFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def search_category_list(request, searchString):
     categories = Category.objects.filter(title__contains=searchString)
     serializer = CategoryFormSerializer(categories, many=True)
@@ -335,6 +343,7 @@ def category_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: FTWWordFormSerializer(many=True)})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def ftwword_list(request):
     ftwwords = FTWWord.objects.all()
     serializer = FTWWordFormSerializer(ftwwords, many=True)
@@ -443,6 +452,7 @@ def media_download(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def media_get(request, pk):
     try:
         media = Media.objects.get(pk=pk)
@@ -457,6 +467,7 @@ def media_get(request, pk):
 
 @swagger_auto_schema(method='POST', responses={200: RegisterFormSerializer()})
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def register_form_create(request):
     data = JSONParser().parse(request)
     serializer = RegisterFormSerializer(data=data)
@@ -473,6 +484,7 @@ def register_form_create(request):
 
 @swagger_auto_schema(method='GET', responses={200: FTWUserDetailSerializer()})
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def user_detail_get(request, pk):
     try:
         user = FTWUser.objects.get(user__pk=pk)
