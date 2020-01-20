@@ -52,7 +52,16 @@ def search_event_list(request, searchString):
 @api_view(['GET'])
 @permission_required('ftw.view_event', raise_exception=True)
 def private_event_list(request, pk):
-    events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__friends__id=pk))
+    events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__ftw_user__friends__id=pk))
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_event', raise_exception=True)
+def private_search_event_list(request, searchString, pk):
+    events = Event.objects.filter(Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=pk) | Q(creator__ftw_user__friends__id=pk)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
