@@ -42,7 +42,7 @@ def public_event_list(request):
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 def search_event_list(request, searchString):
-    events = Event.objects.filter(Q(name__contains=searchString) | Q(private=False))
+    events = Event.objects.filter(Q(name__contains=searchString) & Q(private=False))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
