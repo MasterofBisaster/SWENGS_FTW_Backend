@@ -42,7 +42,7 @@ class Event(models.Model):
     short_description = models.TextField(max_length=50)
     description = models.TextField()
     max_users = models.PositiveIntegerField(null=True)
-    confirmed_users = models.ManyToManyField(User, related_name='attending_events', blank=True)
+    confirmed_users = models.ManyToManyField(User, related_name='attending_events', null=True, blank=True)
     costs = models.PositiveIntegerField(null=True)
     picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
 
