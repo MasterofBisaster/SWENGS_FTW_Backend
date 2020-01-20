@@ -65,6 +65,7 @@ urlpatterns = [
     #FTWUSER
     path('user/<int:pk>/detail', views.user_detail_get),
     path('user/<int:pk>/update', views.user_form_update),
+    path('user/add-friend/<int:user_id>/<int:friend_id>', views.add_friend_to_user),
 
     #MEDIA
     #url(r'^media$', FileUploadView.as_view()),

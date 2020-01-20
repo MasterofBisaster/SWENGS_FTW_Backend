@@ -10,6 +10,9 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
@@ -21,6 +24,7 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 # @permission_required('ftw.view_event', raise_exception=True)
+@permission_classes([AllowAny])
 def event_list(request):
     events = Event.objects.all()
     serializer = EventListSerializer(events, many=True)
@@ -510,3 +514,21 @@ def add_user_to_event(request, user_id, event_id):
     else:
         event.confirmed_users.add(user)
     return Response(status=201)
+
+
+######################################### add Friend to FTWUser ##################################################
+
+@swagger_auto_schema(method='POST', responses=200)
+@api_view(['POST'])
+def add_friend_to_user(request, user_id, friend_id):
+    ftwUser = FTWUser.objects.get(user__id=user_id)
+    friend = User.objects.get(pk=friend_id)
+    friends = ftwUser.friends.all()
+    if friend in friends:
+        friends = friends.filter(~Q(username=friend.username))
+        ftwUser.friends.set(friends)
+        # event.confirmed_users.exclude(username=user.username)
+    else:
+        ftwUser.friends.add(friend)
+    return Response(status=201)
+
