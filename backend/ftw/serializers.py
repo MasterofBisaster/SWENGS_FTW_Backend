@@ -154,27 +154,25 @@ class RegisterFormSerializer(serializers.ModelSerializer):
 
 class FTWUserDetailSerializer(serializers.ModelSerializer):
     user_username = serializers.SerializerMethodField()
-    user_first_name = serializers.SerializerMethodField()
-    user_last_name = serializers.SerializerMethodField()
     user_id = serializers.SerializerMethodField()
     class Meta:
         model = FTWUser
         fields = ['id',
                   'picture',
+                  'first_name',
+                  'last_name',
                   'user_username',
-                  'user_first_name',
-                  'user_last_name',
                   'user_id'
                   ]
 
     def get_user_username(self, obj):
         return obj.user.username if obj.user else ''
 
-    def get_user_first_name(self, obj):
-        return obj.user.first_name if obj.user else ''
-
-    def get_user_last_name(self, obj):
-        return obj.user.last_name if obj.user else ''
+    def check_friendship(self, data):
+        user = data.user.username
+        friendlist = data.ftwuser.friends
+        if user in friendlist:
+            return 'true'
 
     def get_user_id(self,obj):
         return obj.user.id if obj.user else ''

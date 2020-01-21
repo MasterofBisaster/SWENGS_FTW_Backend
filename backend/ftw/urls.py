@@ -75,6 +75,9 @@ urlpatterns = [
     path('media/<int:pk>', views.media_download),
     path('media/<int:pk>/get', views.media_get),
 
+    #TEST AREA
+    path('test', views.test),
+
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
