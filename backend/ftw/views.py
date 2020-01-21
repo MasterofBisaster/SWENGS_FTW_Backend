@@ -38,6 +38,13 @@ def public_event_list(request):
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_event_list(request,pk):
+    events = Event.objects.filter(creator__id=pk)
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])

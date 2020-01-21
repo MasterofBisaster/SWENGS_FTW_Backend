@@ -54,6 +54,8 @@ class FTWUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='ftw_user')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
     picture = models.ForeignKey(Media, on_delete=models.CASCADE, null=True, blank=True)
+    first_name = models.TextField(null=True)
+    last_name = models.TextField(null=True)
 
     def __str__(self):
         return self.user.username
