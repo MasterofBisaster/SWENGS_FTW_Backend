@@ -553,3 +553,14 @@ def add_friend_to_user(request, user_id, friend_id):
         ftwUser.friends.add(friend)
     return Response(status=201)
 
+######################################### Test Area ##################################################
+
+@swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def test(request):
+
+    if request.user.id == 1:
+        return Response({'test': 'Yay'}, status=200)
+    else:
+        return Response({'error': 'You have no permission'}, status=401)
