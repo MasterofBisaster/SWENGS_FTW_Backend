@@ -156,7 +156,7 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
     user_username = serializers.SerializerMethodField()
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
-
+    user_id = serializers.SerializerMethodField()
     class Meta:
         model = FTWUser
         fields = ['id',
@@ -164,6 +164,7 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
                   'user_username',
                   'user_first_name',
                   'user_last_name',
+                  'user_id'
                   ]
 
     def get_user_username(self, obj):
@@ -174,3 +175,6 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
 
     def get_user_last_name(self, obj):
         return obj.user.last_name if obj.user else ''
+
+    def get_user_id(self,obj):
+        return obj.user.id if obj.user else ''
