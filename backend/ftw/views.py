@@ -562,8 +562,9 @@ def add_user_to_event(request, user_id, event_id):
 
 ######################################### add Friend to FTWUser ##################################################
 
-@swagger_auto_schema(method='POST', responses=200)
-@api_view(['POST'])
+@swagger_auto_schema(method='PUT', responses=200)
+@api_view(['PUT'])
+@permission_classes([AllowAny])
 def add_friend_to_user(request, user_id, friend_id):
     ftwUser = FTWUser.objects.get(user__id=user_id)
     friend = User.objects.get(pk=friend_id)
