@@ -154,6 +154,7 @@ class RegisterFormSerializer(serializers.ModelSerializer):
 
 class FTWUserDetailSerializer(serializers.ModelSerializer):
     user_username = serializers.SerializerMethodField()
+    user_id = serializers.SerializerMethodField()
 
     class Meta:
         model = FTWUser
