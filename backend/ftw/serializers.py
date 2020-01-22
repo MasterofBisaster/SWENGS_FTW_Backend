@@ -162,10 +162,14 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
                   'first_name',
                   'last_name',
                   'user_username',
+                  'user_id',
                   ]
 
     def get_user_username(self, obj):
         return obj.user.username if obj.user else ''
+
+    def get_user_id(self, obj):
+        return obj.user.id if obj.user else ''
 
     def check_friendship(self, data):
         user = data.user.username
