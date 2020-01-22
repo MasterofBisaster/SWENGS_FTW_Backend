@@ -7,11 +7,10 @@ from django.http import HttpResponse
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import views
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser, MultiPartParser
-from rest_framework.response import Response
-
 from rest_framework.decorators import permission_classes
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
@@ -38,13 +37,15 @@ def public_event_list(request):
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
+
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def user_event_list(request,pk):
-    events = Event.objects.filter(creator__id=pk)
+def user_event_list(request):
+    events = Event.objects.filter(creator__id=request.user.id)
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
@@ -58,8 +59,8 @@ def search_event_list(request, searchString):
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('ftw.view_event', raise_exception=True)
-def private_event_list(request, pk):
-    events = Event.objects.filter(Q(private=False) | Q(creator__id=pk) | Q(creator__ftw_user__friends__id=pk))
+def private_event_list(request):
+    events = Event.objects.filter(Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -67,8 +68,9 @@ def private_event_list(request, pk):
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_required('ftw.view_event', raise_exception=True)
-def private_search_event_list(request, searchString, pk):
-    events = Event.objects.filter(Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=pk) | Q(creator__ftw_user__friends__id=pk)))
+def private_search_event_list(request, searchString):
+    events = Event.objects.filter(
+        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -94,12 +96,14 @@ def event_form_update(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    data = JSONParser().parse(request)
-    serializer = EventFormSerializer(event, data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=400)
+        data = JSONParser().parse(request)
+        serializer = EventFormSerializer(event, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    else:
+        return Response({'error': 'User can not update this event!.'}, status=404)
 
 
 @swagger_auto_schema(method='GET', responses={200: EventFormSerializer()})
@@ -111,8 +115,11 @@ def event_form_get(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    serializer = EventFormSerializer(event)
-    return Response(serializer.data)
+    if request.user.id == event.creator.id:
+        serializer = EventFormSerializer(event)
+        return Response(serializer.data)
+    else:
+        return Response({'error': 'User can not get this event information!.'}, status=404)
 
 
 @swagger_auto_schema(method='GET', responses={200: EventDetailSerializer()})
@@ -123,9 +130,14 @@ def event_detail_get(request, pk):
         event = Event.objects.get(pk=pk)
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
+#        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
 
-    serializer = EventDetailSerializer(event)
-    return Response(serializer.data)
+
+    if event.private == False or request.user.id == event.creator.id or request.user.id in request.user.ftw_user.friends:
+        serializer = EventDetailSerializer(event)
+        return Response(serializer.data)
+    else:
+        return Response({'error': 'User can not get this event information!'}, status=404)
 
 
 @api_view(['DELETE'])
@@ -135,9 +147,12 @@ def event_delete(request, pk):
         event = Event.objects.get(pk=pk)
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
-    event.delete()
-    return Response(status=204)
 
+    if request.user.id == event.creator.id:
+        event.delete()
+        return Response(status=204)
+    else:
+        return Response({'error': 'User can not get this event information!.'}, status=404)
 
 ######################################### Location ##################################################
 
@@ -216,7 +231,6 @@ def location_delete(request, pk):
 
 @swagger_auto_schema(method='GET', responses={200: CommentFormSerializer(many=True)})
 @api_view(['GET'])
-
 def comment_list(request):
     comments = Comment.objects.all()
     serializer = CommentFormSerializer(comments, many=True)
@@ -520,11 +534,15 @@ def user_form_update(request, pk):
     except FTWUser.DoesNotExist:
         return Response({'error': 'FTWUser does not exist.'}, status=404)
 
-    serializer = FTWUserDetailSerializer(user, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=400)
+    if request.user.id == user.user_id:
+        serializer = FTWUserDetailSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    else:
+        return Response({'error': 'User can not update this user!'}, status=404)
+
 
 
 ######################################### add User to Event ##################################################
@@ -560,13 +578,13 @@ def add_friend_to_user(request, user_id, friend_id):
         ftwUser.friends.add(friend)
     return Response(status=201)
 
+
 ######################################### Test Area ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: MediaSerializer()})
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def test(request):
-
     if request.user.id == 1:
         return Response({'test': 'Yay'}, status=200)
     else:

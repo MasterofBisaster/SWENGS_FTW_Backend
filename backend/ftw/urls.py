@@ -23,7 +23,7 @@ urlpatterns = [
     # EVENT
     path('event/list', views.event_list),
     path('event/list/public', views.public_event_list),
-    path('event/list/private/<int:pk>', views.private_event_list),
+    path('event/list/private/', views.private_event_list),
     path('event/list/search/<str:searchString>', views.search_event_list),
     path('event/list/private/search/<str:searchString>/<int:pk>', views.private_search_event_list),
     path('event/create', views.event_form_create),
