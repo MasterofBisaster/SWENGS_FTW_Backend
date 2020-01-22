@@ -41,8 +41,8 @@ def public_event_list(request):
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def user_event_list(request):
-    events = Event.objects.filter(creator__id=request.user.id)
+def user_event_list(request, pk):
+    events = Event.objects.filter(creator__id=pk)
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -115,7 +115,7 @@ def event_form_get(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    if request.user.id == event.creator.id:
+    if request.user.id == event.creator.id or request.user.id in request.user.ftw_user.friends:
         serializer = EventFormSerializer(event)
         return Response(serializer.data)
     else:
@@ -133,7 +133,7 @@ def event_detail_get(request, pk):
 #        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
 
 
-    if event.private == False or request.user.id == event.creator.id or request.user.id in request.user.ftw_user.friends:
+    if event.private == False or request.user.id == event.creator.id:
         serializer = EventDetailSerializer(event)
         return Response(serializer.data)
     else:
