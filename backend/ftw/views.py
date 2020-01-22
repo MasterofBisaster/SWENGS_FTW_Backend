@@ -42,7 +42,7 @@ def public_event_list(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def user_event_list(request, pk):
-    events = Event.objects.filter(creator__id=pk)
+    events = Event.objects.filter(Q(creator=pk) & (Q(private=False)| Q(creator__ftw_user__friends__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -130,8 +130,6 @@ def event_detail_get(request, pk):
         event = Event.objects.get(pk=pk)
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
-#        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
-
 
     if event.private == False or request.user.id == event.creator.id:
         serializer = EventDetailSerializer(event)
