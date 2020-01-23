@@ -179,3 +179,8 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
             return 'true'
         else:
             return 'false'
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

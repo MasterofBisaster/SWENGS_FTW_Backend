@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
-    RegisterFormSerializer, FTWUserDetailSerializer
+    RegisterFormSerializer, FTWUserDetailSerializer, UserListSerializer
 
 
 ######################################### Event ##################################################
@@ -523,6 +523,14 @@ def register_form_create(request):
 
 
 ######################################### User ##################################################
+
+@swagger_auto_schema(method='GET', responses={200: UserListSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_list(request):
+    users = User.objects.all()
+    serializer = UserListSerializer(users, many=True)
+    return Response(serializer.data)
 
 
 @swagger_auto_schema(method='GET', responses={200: FTWUserDetailSerializer()})
