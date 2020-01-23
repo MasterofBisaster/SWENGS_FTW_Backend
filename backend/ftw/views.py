@@ -116,7 +116,7 @@ def event_form_get(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    if request.user.id == event.creator.id or request.user.id in request.user.ftw_user.friends:
+    if request.user.id == event.creator.id or Q(creator__ftw_user__friends__id=request.user.id):
         serializer = EventFormSerializer(event)
         return Response(serializer.data)
     else:
@@ -132,7 +132,7 @@ def event_detail_get(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    if event.private == False or request.user.id == event.creator.id:
+    if event.private == False or request.user.id == event.creator.id or Q(creator__ftw_user__friends__id=request.user.id):
         serializer = EventDetailSerializer(event)
         return Response(serializer.data)
     else:
@@ -153,8 +153,8 @@ def event_delete(request, pk):
     else:
         return Response({'error': 'User can not get this event information!.'}, status=404)
 
-######################################### Location ##################################################
 
+######################################### Location ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
 @api_view(['GET'])
