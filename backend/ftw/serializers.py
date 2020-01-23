@@ -164,7 +164,6 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
                   'last_name',
                   'user_username',
                   'user_id',
-                  'check_friendship'
                   ]
 
     def get_user_username(self, obj):

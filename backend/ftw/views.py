@@ -96,6 +96,7 @@ def event_form_update(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
+    if request.user.id == event.creator.id:
         data = JSONParser().parse(request)
         serializer = EventFormSerializer(event, data=data)
         if serializer.is_valid():
