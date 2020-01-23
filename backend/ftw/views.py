@@ -545,9 +545,9 @@ def user_form_update(request, pk):
 
 ######################################### add User to Event ##################################################
 
-@swagger_auto_schema(method='POST', responses=200)
-@api_view(['POST'])
-def add_user_to_event(request, user_id, event_id):
+@swagger_auto_schema(method='PUT', responses=200)
+@api_view(['PUT'])
+def add_user_to_event(request, event_id, user_id):
     event = Event.objects.get(pk=event_id)
     users = event.confirmed_users.all()
     user = User.objects.get(pk=user_id)
@@ -564,7 +564,6 @@ def add_user_to_event(request, user_id, event_id):
 
 @swagger_auto_schema(method='PUT', responses=200)
 @api_view(['PUT'])
-@permission_classes([AllowAny])
 def add_friend_to_user(request, user_id, friend_id):
     ftwUser = FTWUser.objects.get(user__id=user_id)
     friend = User.objects.get(pk=friend_id)

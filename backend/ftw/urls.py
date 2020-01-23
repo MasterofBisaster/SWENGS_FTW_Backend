@@ -33,8 +33,6 @@ urlpatterns = [
     path('event/<int:pk>/delete', views.event_delete),
     path('event/add-user/<int:event_id>/<int:user_id>', views.add_user_to_event),
 
-
-
     # LOCATION
     path('location/list', views.location_list),
     path('location/list/search/<str:searchString>', views.search_location_list),
