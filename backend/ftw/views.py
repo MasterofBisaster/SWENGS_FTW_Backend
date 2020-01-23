@@ -20,57 +20,70 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
 
 ######################################### Event ##################################################
 
-@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def event_list(request):
-    events = Event.objects.all()
-    serializer = EventListSerializer(events, many=True)
-    return Response(serializer.data)
-
-
-@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def public_event_list(request):
-    events = Event.objects.filter(private=False)
-    serializer = EventListSerializer(events, many=True)
-    return Response(serializer.data)
+# @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def event_list(request):
+#     events = Event.objects.all()
+#     serializer = EventListSerializer(events, many=True)
+#     return Response(serializer.data)
 
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def user_event_list(request, pk):
-    events = Event.objects.filter(Q(creator=pk) & (Q(private=False)| Q(creator__ftw_user__friends__id=request.user.id)))
+    events = Event.objects.filter(
+        Q(creator=pk) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_required('ftw.view_event', raise_exception=True)
+def search_event_list(request, searchString):
+    events = Event.objects.filter(
+        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(
+            creator__ftw_user__friends__id=request.user.id)))
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+
+# @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def search_event_list(request, searchString):
+#     events = Event.objects.filter(Q(name__contains=searchString) & Q(private=False))
+#     serializer = EventListSerializer(events, many=True)
+#     return Response(serializer.data)
+#
+#
+# @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_required('ftw.view_event', raise_exception=True)
+# def private_search_event_list(request, searchString):
+#     events = Event.objects.filter(
+#         Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
+#     serializer = EventListSerializer(events, many=True)
+#     return Response(serializer.data)
+
+
+# @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+# @api_view(['GET'])
+# @permission_required('ftw.view_event', raise_exception=True)
+# def private_event_list(request):
+#     events = Event.objects.filter(Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id))
+#     serializer = EventListSerializer(events, many=True)
+#     return Response(serializer.data)
 
 
 @swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def search_event_list(request, searchString):
-    events = Event.objects.filter(Q(name__contains=searchString) & Q(private=False))
-    serializer = EventListSerializer(events, many=True)
-    return Response(serializer.data)
-
-
-@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
-@api_view(['GET'])
-@permission_required('ftw.view_event', raise_exception=True)
-def private_event_list(request):
-    events = Event.objects.filter(Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id))
-    serializer = EventListSerializer(events, many=True)
-    return Response(serializer.data)
-
-
-@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
-@api_view(['GET'])
-@permission_required('ftw.view_event', raise_exception=True)
-def private_search_event_list(request, searchString):
+def event_list(request):
     events = Event.objects.filter(
-        Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)))
+        Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -132,7 +145,8 @@ def event_detail_get(request, pk):
     except Event.DoesNotExist:
         return Response({'error': 'Event does not exist.'}, status=404)
 
-    if event.private == False or request.user.id == event.creator.id or Q(creator__ftw_user__friends__id=request.user.id):
+    if event.private == False or request.user.id == event.creator.id or Q(
+            creator__ftw_user__friends__id=request.user.id):
         serializer = EventDetailSerializer(event)
         return Response(serializer.data)
     else:
@@ -541,7 +555,6 @@ def user_form_update(request, pk):
         return Response(serializer.errors, status=400)
     else:
         return Response({'error': 'User can not update this user!'}, status=404)
-
 
 
 ######################################### add User to Event ##################################################
