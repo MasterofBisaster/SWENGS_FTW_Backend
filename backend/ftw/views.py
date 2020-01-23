@@ -555,7 +555,6 @@ def add_user_to_event(request, event_id, user_id):
     if user in users:
         users = users.filter(~Q(username=user.username))
         event.confirmed_users.set(users)
-        # event.confirmed_users.exclude(username=user.username)
     else:
         event.confirmed_users.add(user)
     return Response(status=201)
@@ -572,7 +571,6 @@ def add_friend_to_user(request, user_id, friend_id):
     if friend in friends:
         friends = friends.filter(~Q(username=friend.username))
         ftwUser.friends.set(friends)
-        # event.confirmed_users.exclude(username=user.username)
     else:
         ftwUser.friends.add(friend)
     return Response(status=201)
