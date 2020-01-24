@@ -31,6 +31,9 @@ urlpatterns = [
     path('event/add-user/<int:event_id>/<int:user_id>', views.add_user_to_event),
     path('event/list/category/<int:categoryId>', views.event_filter_category),
     path('event/list/location/<int:locationId>', views.event_filter_location),
+    path('event/check/attending-status/<int:event_id>', views.check_user_in_confirmed_users),
+
+
 
     # LOCATION
     path('location/list', views.location_list),

@@ -17,6 +17,8 @@ from backend.ftw.serializers import EventListSerializer, EventFormSerializer, Lo
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
     RegisterFormSerializer, FTWUserDetailSerializer, UserListSerializer
 
+import json
+
 
 ######################################### Event ##################################################
 
@@ -635,6 +637,21 @@ def check_for_friends(request, user_id, friend_id):
         return Response(True, status=200);
     else:
         return Response(False, status=200);
+
+######################################### check if user is in attending users ###################################
+
+@swagger_auto_schema(method='GET', responses=200)
+@api_view(['GET'])
+def check_user_in_confirmed_users(request, event_id):
+    user = User.objects.get(pk=request.user.id)
+    event = Event.objects.get(pk=event_id)
+    confirmed_users = event.confirmed_users.all()
+    if user in confirmed_users:
+        return Response(json.dumps(True), status=200);
+    else:
+        return Response(json.dumps(False), status=200);
+
+
 
 ######################################### Test Area ##################################################
 
