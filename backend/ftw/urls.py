@@ -29,6 +29,8 @@ urlpatterns = [
     path('event/<int:pk>/update', views.event_form_update),
     path('event/<int:pk>/delete', views.event_delete),
     path('event/add-user/<int:event_id>/<int:user_id>', views.add_user_to_event),
+    path('event/list/category/<int:categoryId>', views.event_filter_category),
+    path('event/list/location/<int:locationId>', views.event_filter_location),
 
     # LOCATION
     path('location/list', views.location_list),

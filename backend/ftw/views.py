@@ -168,6 +168,28 @@ def event_delete(request, pk):
         return Response({'error': 'User can not get this event information!.'}, status=404)
 
 
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def event_filter_category(request, categoryId):
+    events = Event.objects.filter(
+        Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator=request.user.id)))
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+
+@swagger_auto_schema(method='GET', responses={200: EventListSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def event_filter_location(request, locationId):
+    events = Event.objects.filter(
+        Q(category__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator=request.user.id)))
+    serializer = EventListSerializer(events, many=True)
+    return Response(serializer.data)
+
+
+
+
 ######################################### Location ##################################################
 
 @swagger_auto_schema(method='GET', responses={200: LocationFormSerializer(many=True)})
