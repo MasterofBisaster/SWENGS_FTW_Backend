@@ -49,6 +49,7 @@ class EventDetailSerializer(serializers.ModelSerializer):
                   'name',
                   'start_date',
                   'end_date',
+                  'confirmed_users',
                   #
                   'creator',
                   'user_name',
