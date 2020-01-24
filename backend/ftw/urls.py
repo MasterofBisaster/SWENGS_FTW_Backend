@@ -57,6 +57,7 @@ urlpatterns = [
 
     # FTWWord
     path('ftwword/list', views.ftwword_list),
+    path('ftwword/list/sfw', views.ftwword_list_sfw),
 
     # REGISTER
     path(r'register/create', views.register_form_create),

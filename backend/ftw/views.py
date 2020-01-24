@@ -414,6 +414,13 @@ def ftwword_list(request):
     serializer = FTWWordFormSerializer(ftwwords, many=True)
     return Response(serializer.data)
 
+@swagger_auto_schema(method='GET', responses={200: FTWWordFormSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def ftwword_list_sfw(request):
+    ftwwords = FTWWord.objects.filter(safe_for_work=True)
+    serializer = FTWWordFormSerializer(ftwwords, many=True)
+    return Response(serializer.data)
 
 @swagger_auto_schema(method='POST', request_body=FTWWordFormSerializer, responses={200: FTWWordFormSerializer()})
 @api_view(['POST'])

@@ -79,6 +79,7 @@ class FTWWord(models.Model):
     )
     word = models.TextField()
     word_category = models.CharField(max_length=1, choices=CHOICES)
+    safe_for_work = models.BooleanField()
 
     def __str__(self):
         return self.word
