@@ -173,7 +173,7 @@ def event_delete(request, pk):
 @permission_classes([AllowAny])
 def event_filter_category(request, categoryId):
     events = Event.objects.filter(
-        Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator=request.user.id)))
+        Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -183,7 +183,7 @@ def event_filter_category(request, categoryId):
 @permission_classes([AllowAny])
 def event_filter_location(request, locationId):
     events = Event.objects.filter(
-        Q(category__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator=request.user.id)))
+        Q(location__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
