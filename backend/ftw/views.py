@@ -596,6 +596,16 @@ def add_friend_to_user(request, user_id, friend_id):
         ftwUser.friends.add(friend)
     return Response(status=201)
 
+@swagger_auto_schema(method='GET', responses=200)
+@api_view(['GET'])
+def check_for_friends(request, user_id, friend_id):
+    ftwUser = FTWUser.objects.get(user__id=user_id)
+    friend = User.objects.get(pk=friend_id)
+    ftwFriends = ftwUser.friends.all()
+    if friend in ftwFriends:
+        return Response(True, status=200);
+    else:
+        return Response(False, status=200);
 
 ######################################### Test Area ##################################################
 

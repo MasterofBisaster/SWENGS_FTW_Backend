@@ -162,6 +162,7 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
         fields = ['id',
                   'picture',
                   'first_name',
+                  'friends',
                   'last_name',
                   'user_username',
                   'user_id',

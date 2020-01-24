@@ -65,6 +65,7 @@ urlpatterns = [
     path('user/add-friend/<int:user_id>/<int:friend_id>', views.add_friend_to_user),
     path('user/event/<int:pk>', views.user_event_list),
     path('user/list', views.user_list),
+    path('user/check-friends/<int:user_id>/<int:friend_id>', views.check_for_friends),
 
     # MEDIA
     # url(r'^media$', FileUploadView.as_view()),
