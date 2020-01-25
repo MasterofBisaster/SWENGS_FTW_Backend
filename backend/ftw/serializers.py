@@ -182,6 +182,20 @@ class FTWUserDetailSerializer(serializers.ModelSerializer):
         else:
             return 'false'
 
+
+class UserFriendListSerializer(serializers.ModelSerializer):
+    picture = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id',
+                  'username',
+                  'picture',
+                  ]
+
+    def get_picture(self, obj):
+        return obj.ftw_user.picture.id if obj.ftw_user.picture else ''
+
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

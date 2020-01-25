@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from backend.ftw.models import Event, Comment, Category, Location, FTWWord, Media, FTWUser
 from backend.ftw.serializers import EventListSerializer, EventFormSerializer, LocationFormSerializer, \
     CommentFormSerializer, CategoryFormSerializer, FTWWordFormSerializer, MediaSerializer, EventDetailSerializer, \
-    RegisterFormSerializer, FTWUserDetailSerializer, UserListSerializer
+    RegisterFormSerializer, FTWUserDetailSerializer, UserListSerializer, UserFriendListSerializer
 
 import json
 
@@ -175,7 +175,8 @@ def event_delete(request, pk):
 @permission_classes([AllowAny])
 def event_filter_category(request, categoryId):
     events = Event.objects.filter(
-        Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator__id=request.user.id)))
+        Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(
+            creator__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -185,11 +186,10 @@ def event_filter_category(request, categoryId):
 @permission_classes([AllowAny])
 def event_filter_location(request, locationId):
     events = Event.objects.filter(
-        Q(location__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(creator__id=request.user.id)))
+        Q(location__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(
+            creator__id=request.user.id)))
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
-
-
 
 
 ######################################### Location ##################################################
@@ -416,6 +416,7 @@ def ftwword_list(request):
     serializer = FTWWordFormSerializer(ftwwords, many=True)
     return Response(serializer.data)
 
+
 @swagger_auto_schema(method='GET', responses={200: FTWWordFormSerializer(many=True)})
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -423,6 +424,7 @@ def ftwword_list_sfw(request):
     ftwwords = FTWWord.objects.filter(safe_for_work=True)
     serializer = FTWWordFormSerializer(ftwwords, many=True)
     return Response(serializer.data)
+
 
 @swagger_auto_schema(method='POST', request_body=FTWWordFormSerializer, responses={200: FTWWordFormSerializer()})
 @api_view(['POST'])
@@ -596,6 +598,17 @@ def user_form_update(request, pk):
         return Response({'error': 'User can not update this user!'}, status=404)
 
 
+@swagger_auto_schema(method='GET', responses={200: UserFriendListSerializer(many=True)})
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_friend_list(request, user_id):
+    ftwUser = FTWUser.objects.get(user__id=user_id)
+    friends = ftwUser.friends.all()
+
+    serializer = UserFriendListSerializer(friends, many=True)
+    return Response(serializer.data)
+
+
 ######################################### add User to Event ##################################################
 
 @swagger_auto_schema(method='PUT', responses=200)
@@ -627,6 +640,7 @@ def add_friend_to_user(request, user_id, friend_id):
         ftwUser.friends.add(friend)
     return Response(status=201)
 
+
 @swagger_auto_schema(method='GET', responses=200)
 @api_view(['GET'])
 def check_for_friends(request, user_id, friend_id):
@@ -634,9 +648,10 @@ def check_for_friends(request, user_id, friend_id):
     friend = User.objects.get(pk=friend_id)
     ftwFriends = ftwUser.friends.all()
     if friend in ftwFriends:
-        return Response(True, status=200);
+        return Response(json.dumps(True), status=200);
     else:
-        return Response(False, status=200);
+        return Response(json.dumps(False), status=200);
+
 
 ######################################### check if user is in attending users ###################################
 
@@ -650,7 +665,6 @@ def check_user_in_confirmed_users(request, event_id):
         return Response(json.dumps(True), status=200);
     else:
         return Response(json.dumps(False), status=200);
-
 
 
 ######################################### Test Area ##################################################
