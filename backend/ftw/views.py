@@ -36,7 +36,7 @@ import json
 @permission_classes([AllowAny])
 def user_event_list(request, pk):
     events = Event.objects.filter(
-        Q(creator=pk) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id)))
+        Q(creator=pk) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id))).distinct()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -47,7 +47,7 @@ def user_event_list(request, pk):
 def search_event_list(request, searchString):
     events = Event.objects.filter(
         Q(name__contains=searchString) & (Q(private=False) | Q(creator__id=request.user.id) | Q(
-            creator__ftw_user__friends__id=request.user.id)))
+            creator__ftw_user__friends__id=request.user.id))).distinct()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -85,7 +85,7 @@ def search_event_list(request, searchString):
 @permission_classes([AllowAny])
 def event_list(request):
     events = Event.objects.filter(
-        Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id))
+        Q(private=False) | Q(creator__id=request.user.id) | Q(creator__ftw_user__friends__id=request.user.id)).distinct()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -176,7 +176,7 @@ def event_delete(request, pk):
 def event_filter_category(request, categoryId):
     events = Event.objects.filter(
         Q(category__id=categoryId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(
-            creator__id=request.user.id)))
+            creator__id=request.user.id))).distinct()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
@@ -187,7 +187,7 @@ def event_filter_category(request, categoryId):
 def event_filter_location(request, locationId):
     events = Event.objects.filter(
         Q(location__id=locationId) & (Q(private=False) | Q(creator__ftw_user__friends__id=request.user.id) | Q(
-            creator__id=request.user.id)))
+            creator__id=request.user.id))).distinct()
     serializer = EventListSerializer(events, many=True)
     return Response(serializer.data)
 
