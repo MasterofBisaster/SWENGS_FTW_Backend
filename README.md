@@ -16,6 +16,11 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
+### import the demo database
+```bash
+python manage.py loaddata db.json
+```
+
 ### run backend server
 ```bash
 python manage.py runserver
