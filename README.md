@@ -5,7 +5,7 @@
 ### install the required Python packages with pip
 
 1. Clone the project (if not already done)
-2. open a command line tool and navigate to the project root (cmd executed as Admin is highly recommended)
+2. open a command line tool and navigate to the project root folder (cmd executed as Admin is highly recommended)
 3. Type the following:
 ```bash
 pip install -r requirements.txt
