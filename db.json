@@ -1,106 +1,470 @@
 [
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.group",
   "pk": 1,
   "fields": {
-    "app_label": "admin",
-    "model": "logentry"
+    "name": "user",
+    "permissions": [
+      9,
+      11,
+      12,
+      5,
+      6,
+      7,
+      8,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      25,
+      28,
+      49,
+      50,
+      51,
+      52,
+      45,
+      46,
+      47,
+      48,
+      41,
+      42,
+      43,
+      44,
+      37,
+      40,
+      33,
+      34,
+      35,
+      36,
+      21,
+      22,
+      23,
+      24
+    ]
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$v7HIsPkJ2MPw$hcyeXpcxOQdbvd0HIfki1c7OIaFOFYSbUt+y+YFGR8s=",
+    "last_login": "2020-01-26T16:23:34.764Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@ftw.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:44:09Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
   "pk": 2,
   "fields": {
-    "app_label": "auth",
-    "model": "permission"
+    "password": "pbkdf2_sha256$150000$Tq28s3LQfZST$bxGKC/wyan5QAgKO5xvcAOFShRz4u1MgpxSPfyowun0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "DanielHofer",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:47:26Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 3,
   "fields": {
-    "app_label": "auth",
-    "model": "group"
+    "password": "pbkdf2_sha256$180000$YP8qeYj2C2sn$uY8W2/TOnn4SzN2NNmN3j5M9VswPls3oKcuojCqoEq4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "SarahMair",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:47:54Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 4,
   "fields": {
-    "app_label": "auth",
-    "model": "user"
+    "password": "pbkdf2_sha256$180000$ugEjVmE54riZ$LgLxN99gHLMi61noUdl6t/nOjDxOF440/FsoLsauO7w=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "RobertoEsposito",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:48:15Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 5,
   "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
+    "password": "pbkdf2_sha256$150000$mI7YavfnodUx$pwhduV5VTmNTMfFRTEYLtbXfrvC7YJEhNDwTBrkVCpY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "LukasTamalio",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:48:43Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 6,
   "fields": {
-    "app_label": "sessions",
-    "model": "session"
+    "password": "pbkdf2_sha256$150000$1kLv0StgWQAO$nJJw/sTGCoIV3VjrMpm4nfCCeJmBMiOOVWd11FRN3Wc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ClaudiaDemattio",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:49:04Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 7,
   "fields": {
-    "app_label": "ftw",
-    "model": "category"
+    "password": "pbkdf2_sha256$150000$T6WPTmqTMlZv$R6oSv0vftQXC/I2c2vA80mz9lKiH3imnQD9Kx7G2ynQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "TaylorSwift",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:49:47Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 8,
   "fields": {
-    "app_label": "ftw",
-    "model": "ftwword"
+    "password": "pbkdf2_sha256$150000$wtChRNKttdd4$jW3HfjNeh8RL1kLQRNL2+EwBz7xk62nwpnJT63DLxwo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "KimKardashian",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:49:58Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 9,
   "fields": {
-    "app_label": "ftw",
-    "model": "media"
+    "password": "pbkdf2_sha256$150000$6KHJGDLKLIco$Bc3rm8skOZ8kQ7NnJFlrze58/4CNn56qaBTlFnzMnAI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "CristianoRonaldo",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:50:06Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 10,
   "fields": {
-    "app_label": "ftw",
-    "model": "location"
+    "password": "pbkdf2_sha256$150000$afH3bI5PIdK8$dFKQIHf68k3sDTt1kqbQ+fTv0/0vzpOK2xH9jKjUwnI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Rihanna",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:50:15Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 11,
   "fields": {
-    "app_label": "ftw",
-    "model": "ftwuser"
+    "password": "pbkdf2_sha256$180000$KEflhHROqn5W$BXPLcx4ghlhW1shwBXQsHpyyUYJgETdgVPLACYyuw+0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "JenniferLawrence",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:50:25Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 12,
   "fields": {
-    "app_label": "ftw",
-    "model": "event"
+    "password": "pbkdf2_sha256$180000$K27Xw4bjc0Au$JjvqgRyvGkBD35gzcpuJ3vp6mgBVDF8xMLe70FwV1Qo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "KanyeWest",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:50:36Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
-  "model": "contenttypes.contenttype",
+  "model": "auth.user",
   "pk": 13,
   "fields": {
-    "app_label": "ftw",
-    "model": "comment"
+    "password": "pbkdf2_sha256$150000$cGvUrCgMGCIo$TeMRmXqoEwvfpjbygNPI0RCqgQqm054E6hgszYc1cps=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "KatyPerry",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:50:48Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$XUjiDD6Wvxpz$Bha0PGhccgY5GHlhZgpCjklaqLWTHWBHwjwhZrgWdCQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Beyonc\u00e9",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:00Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$ht6Anar5WXdg$6p/R2ZbI38gycZf65E5CaY59cuITYbcwiWibyQana64=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Jay-Z",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:08Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$XuApdOqZpV5j$GCmFlpOiFWCeEW5WIjMWSO9Re0AIdX0PHYAr8WjR7lY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "JenniferLopez",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:19Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$eHuN2gCq6yzH$6g4PUeMuFxAvtg/OTsmEhmOqfIVwUnugpfSntimgrJk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Tim",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:30Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$Roqoh7NpCBTA$dXraqHywkZRzEX+VG1iZsb7rugJ/z/ry/lyk/Ff5ssA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Julian",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:38Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 19,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$RT6Bs9adqytC$TqgCja/UkmQ4C56ADHRlMv5Dppy/ap6DEZOz6FPO590=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Lukas",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:46Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$uBYjIfIiO9SF$d4THXex/nILvXwJkT+U782J8tI9BFupQCAVXXdV2Uog=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Michael",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T10:51:53Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$180000$PKFEcGUGdJW0$8n/IgPd/Scet0laqKf1FxEkBK7l46Y5GupS+xnaohJ0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "BradPitt",
+    "first_name": "Brad",
+    "last_name": "Pitt",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2020-01-26T12:33:31Z",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
   }
 },
 {
@@ -733,1185 +1097,6 @@
   }
 },
 {
-  "model": "ftw.ftwword",
-  "pk": 4,
-  "fields": {
-    "word": "Fr\u00fchshoppen",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 5,
-  "fields": {
-    "word": "Forschen",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 8,
-  "fields": {
-    "word": "Fechten",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 9,
-  "fields": {
-    "word": "Fluchen",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 12,
-  "fields": {
-    "word": "Fressen",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 13,
-  "fields": {
-    "word": "Fachidiot",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 17,
-  "fields": {
-    "word": "Filmriss",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 19,
-  "fields": {
-    "word": "Freidenken",
-    "word_category": "f",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 21,
-  "fields": {
-    "word": "Tauchen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 22,
-  "fields": {
-    "word": "Tauschen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 23,
-  "fields": {
-    "word": "Tarnen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 24,
-  "fields": {
-    "word": "Teilen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 25,
-  "fields": {
-    "word": "Teilnehmen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 26,
-  "fields": {
-    "word": "Tanzen",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 27,
-  "fields": {
-    "word": "Tanken",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 28,
-  "fields": {
-    "word": "T\u00e4towieren",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 31,
-  "fields": {
-    "word": "Wachr\u00fctteln",
-    "word_category": "w",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 33,
-  "fields": {
-    "word": "Walken",
-    "word_category": "w",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 34,
-  "fields": {
-    "word": "Wandern",
-    "word_category": "w",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 35,
-  "fields": {
-    "word": "Wedeln",
-    "word_category": "w",
-    "safe_for_work": false
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 36,
-  "fields": {
-    "word": "Wichsen",
-    "word_category": "w",
-    "safe_for_work": false
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 37,
-  "fields": {
-    "word": "Wahrsagen",
-    "word_category": "w",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 38,
-  "fields": {
-    "word": "Wegblasen",
-    "word_category": "w",
-    "safe_for_work": false
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 39,
-  "fields": {
-    "word": "Wanken",
-    "word_category": "w",
-    "safe_for_work": false
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 40,
-  "fields": {
-    "word": "Torkeln",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 41,
-  "fields": {
-    "word": "Ficken",
-    "word_category": "f",
-    "safe_for_work": false
-  }
-},
-{
-  "model": "ftw.ftwword",
-  "pk": 42,
-  "fields": {
-    "word": "Trinken",
-    "word_category": "t",
-    "safe_for_work": true
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 1,
-  "fields": {
-    "name": "Can add log entry",
-    "content_type": 1,
-    "codename": "add_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 2,
-  "fields": {
-    "name": "Can change log entry",
-    "content_type": 1,
-    "codename": "change_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 3,
-  "fields": {
-    "name": "Can delete log entry",
-    "content_type": 1,
-    "codename": "delete_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 4,
-  "fields": {
-    "name": "Can view log entry",
-    "content_type": 1,
-    "codename": "view_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 5,
-  "fields": {
-    "name": "Can add permission",
-    "content_type": 2,
-    "codename": "add_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 6,
-  "fields": {
-    "name": "Can change permission",
-    "content_type": 2,
-    "codename": "change_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can delete permission",
-    "content_type": 2,
-    "codename": "delete_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can view permission",
-    "content_type": 2,
-    "codename": "view_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
-    "name": "Can add group",
-    "content_type": 3,
-    "codename": "add_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 10,
-  "fields": {
-    "name": "Can change group",
-    "content_type": 3,
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 11,
-  "fields": {
-    "name": "Can delete group",
-    "content_type": 3,
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 12,
-  "fields": {
-    "name": "Can view group",
-    "content_type": 3,
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 13,
-  "fields": {
-    "name": "Can add user",
-    "content_type": 4,
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 14,
-  "fields": {
-    "name": "Can change user",
-    "content_type": 4,
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 15,
-  "fields": {
-    "name": "Can delete user",
-    "content_type": 4,
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 16,
-  "fields": {
-    "name": "Can view user",
-    "content_type": 4,
-    "codename": "view_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 17,
-  "fields": {
-    "name": "Can add content type",
-    "content_type": 5,
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 18,
-  "fields": {
-    "name": "Can change content type",
-    "content_type": 5,
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 19,
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": 5,
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 20,
-  "fields": {
-    "name": "Can view content type",
-    "content_type": 5,
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 21,
-  "fields": {
-    "name": "Can add session",
-    "content_type": 6,
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 22,
-  "fields": {
-    "name": "Can change session",
-    "content_type": 6,
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 23,
-  "fields": {
-    "name": "Can delete session",
-    "content_type": 6,
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 24,
-  "fields": {
-    "name": "Can view session",
-    "content_type": 6,
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 25,
-  "fields": {
-    "name": "Can add category",
-    "content_type": 7,
-    "codename": "add_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 26,
-  "fields": {
-    "name": "Can change category",
-    "content_type": 7,
-    "codename": "change_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 27,
-  "fields": {
-    "name": "Can delete category",
-    "content_type": 7,
-    "codename": "delete_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 28,
-  "fields": {
-    "name": "Can view category",
-    "content_type": 7,
-    "codename": "view_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 29,
-  "fields": {
-    "name": "Can add ftw word",
-    "content_type": 8,
-    "codename": "add_ftwword"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 30,
-  "fields": {
-    "name": "Can change ftw word",
-    "content_type": 8,
-    "codename": "change_ftwword"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 31,
-  "fields": {
-    "name": "Can delete ftw word",
-    "content_type": 8,
-    "codename": "delete_ftwword"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 32,
-  "fields": {
-    "name": "Can view ftw word",
-    "content_type": 8,
-    "codename": "view_ftwword"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 33,
-  "fields": {
-    "name": "Can add media",
-    "content_type": 9,
-    "codename": "add_media"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 34,
-  "fields": {
-    "name": "Can change media",
-    "content_type": 9,
-    "codename": "change_media"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 35,
-  "fields": {
-    "name": "Can delete media",
-    "content_type": 9,
-    "codename": "delete_media"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 36,
-  "fields": {
-    "name": "Can view media",
-    "content_type": 9,
-    "codename": "view_media"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 37,
-  "fields": {
-    "name": "Can add location",
-    "content_type": 10,
-    "codename": "add_location"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 38,
-  "fields": {
-    "name": "Can change location",
-    "content_type": 10,
-    "codename": "change_location"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 39,
-  "fields": {
-    "name": "Can delete location",
-    "content_type": 10,
-    "codename": "delete_location"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 40,
-  "fields": {
-    "name": "Can view location",
-    "content_type": 10,
-    "codename": "view_location"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 41,
-  "fields": {
-    "name": "Can add ftw user",
-    "content_type": 11,
-    "codename": "add_ftwuser"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 42,
-  "fields": {
-    "name": "Can change ftw user",
-    "content_type": 11,
-    "codename": "change_ftwuser"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 43,
-  "fields": {
-    "name": "Can delete ftw user",
-    "content_type": 11,
-    "codename": "delete_ftwuser"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 44,
-  "fields": {
-    "name": "Can view ftw user",
-    "content_type": 11,
-    "codename": "view_ftwuser"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 45,
-  "fields": {
-    "name": "Can add event",
-    "content_type": 12,
-    "codename": "add_event"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 46,
-  "fields": {
-    "name": "Can change event",
-    "content_type": 12,
-    "codename": "change_event"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 47,
-  "fields": {
-    "name": "Can delete event",
-    "content_type": 12,
-    "codename": "delete_event"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 48,
-  "fields": {
-    "name": "Can view event",
-    "content_type": 12,
-    "codename": "view_event"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 49,
-  "fields": {
-    "name": "Can add comment",
-    "content_type": 13,
-    "codename": "add_comment"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 50,
-  "fields": {
-    "name": "Can change comment",
-    "content_type": 13,
-    "codename": "change_comment"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 51,
-  "fields": {
-    "name": "Can delete comment",
-    "content_type": 13,
-    "codename": "delete_comment"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 52,
-  "fields": {
-    "name": "Can view comment",
-    "content_type": 13,
-    "codename": "view_comment"
-  }
-},
-{
-  "model": "auth.group",
-  "pk": 1,
-  "fields": {
-    "name": "user",
-    "permissions": [
-      9,
-      11,
-      12,
-      5,
-      6,
-      7,
-      8,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      25,
-      28,
-      49,
-      50,
-      51,
-      52,
-      45,
-      46,
-      47,
-      48,
-      41,
-      42,
-      43,
-      44,
-      37,
-      40,
-      33,
-      34,
-      35,
-      36,
-      21,
-      22,
-      23,
-      24
-    ]
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$v7HIsPkJ2MPw$hcyeXpcxOQdbvd0HIfki1c7OIaFOFYSbUt+y+YFGR8s=",
-    "last_login": "2020-01-26T16:23:34.764Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@ftw.com",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:44:09Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$Tq28s3LQfZST$bxGKC/wyan5QAgKO5xvcAOFShRz4u1MgpxSPfyowun0=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "DanielHofer",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:47:26Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 3,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$YP8qeYj2C2sn$uY8W2/TOnn4SzN2NNmN3j5M9VswPls3oKcuojCqoEq4=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "SarahMair",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:47:54Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 4,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$ugEjVmE54riZ$LgLxN99gHLMi61noUdl6t/nOjDxOF440/FsoLsauO7w=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "RobertoEsposito",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:48:15Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 5,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$mI7YavfnodUx$pwhduV5VTmNTMfFRTEYLtbXfrvC7YJEhNDwTBrkVCpY=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "LukasTamalio",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:48:43Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 6,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$1kLv0StgWQAO$nJJw/sTGCoIV3VjrMpm4nfCCeJmBMiOOVWd11FRN3Wc=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "ClaudiaDemattio",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:49:04Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 7,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$T6WPTmqTMlZv$R6oSv0vftQXC/I2c2vA80mz9lKiH3imnQD9Kx7G2ynQ=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "TaylorSwift",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:49:47Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 8,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$wtChRNKttdd4$jW3HfjNeh8RL1kLQRNL2+EwBz7xk62nwpnJT63DLxwo=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "KimKardashian",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:49:58Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 9,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$6KHJGDLKLIco$Bc3rm8skOZ8kQ7NnJFlrze58/4CNn56qaBTlFnzMnAI=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "CristianoRonaldo",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:50:06Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 10,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$afH3bI5PIdK8$dFKQIHf68k3sDTt1kqbQ+fTv0/0vzpOK2xH9jKjUwnI=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Rihanna",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:50:15Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 11,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$KEflhHROqn5W$BXPLcx4ghlhW1shwBXQsHpyyUYJgETdgVPLACYyuw+0=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "JenniferLawrence",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:50:25Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 12,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$K27Xw4bjc0Au$JjvqgRyvGkBD35gzcpuJ3vp6mgBVDF8xMLe70FwV1Qo=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "KanyeWest",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:50:36Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 13,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$cGvUrCgMGCIo$TeMRmXqoEwvfpjbygNPI0RCqgQqm054E6hgszYc1cps=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "KatyPerry",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:50:48Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 14,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$XUjiDD6Wvxpz$Bha0PGhccgY5GHlhZgpCjklaqLWTHWBHwjwhZrgWdCQ=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Beyonc\u00e9",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:00Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 15,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$ht6Anar5WXdg$6p/R2ZbI38gycZf65E5CaY59cuITYbcwiWibyQana64=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Jay-Z",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:08Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 16,
-  "fields": {
-    "password": "pbkdf2_sha256$150000$XuApdOqZpV5j$GCmFlpOiFWCeEW5WIjMWSO9Re0AIdX0PHYAr8WjR7lY=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "JenniferLopez",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:19Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 17,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$eHuN2gCq6yzH$6g4PUeMuFxAvtg/OTsmEhmOqfIVwUnugpfSntimgrJk=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Tim",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:30Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 18,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$Roqoh7NpCBTA$dXraqHywkZRzEX+VG1iZsb7rugJ/z/ry/lyk/Ff5ssA=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Julian",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:38Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 19,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$RT6Bs9adqytC$TqgCja/UkmQ4C56ADHRlMv5Dppy/ap6DEZOz6FPO590=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Lukas",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:46Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 20,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$uBYjIfIiO9SF$d4THXex/nILvXwJkT+U782J8tI9BFupQCAVXXdV2Uog=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "Michael",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T10:51:53Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 21,
-  "fields": {
-    "password": "pbkdf2_sha256$180000$PKFEcGUGdJW0$8n/IgPd/Scet0laqKf1FxEkBK7l46Y5GupS+xnaohJ0=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "BradPitt",
-    "first_name": "Brad",
-    "last_name": "Pitt",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-01-26T12:33:31Z",
-    "groups": [
-      1
-    ],
-    "user_permissions": []
-  }
-},
-{
   "model": "ftw.event",
   "pk": 1,
   "fields": {
@@ -2493,6 +1678,249 @@
     "creator": 11,
     "content": "<p>Love you all!</p>",
     "create_date": "2020-01-26T14:51:37Z"
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 4,
+  "fields": {
+    "word": "Fr\u00fchshoppen",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 5,
+  "fields": {
+    "word": "Forschen",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 8,
+  "fields": {
+    "word": "Fechten",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 9,
+  "fields": {
+    "word": "Fluchen",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 12,
+  "fields": {
+    "word": "Fressen",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 13,
+  "fields": {
+    "word": "Fachidiot",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 17,
+  "fields": {
+    "word": "Filmriss",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 19,
+  "fields": {
+    "word": "Freidenken",
+    "word_category": "f",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 21,
+  "fields": {
+    "word": "Tauchen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 22,
+  "fields": {
+    "word": "Tauschen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 23,
+  "fields": {
+    "word": "Tarnen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 24,
+  "fields": {
+    "word": "Teilen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 25,
+  "fields": {
+    "word": "Teilnehmen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 26,
+  "fields": {
+    "word": "Tanzen",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 27,
+  "fields": {
+    "word": "Tanken",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 28,
+  "fields": {
+    "word": "T\u00e4towieren",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 31,
+  "fields": {
+    "word": "Wachr\u00fctteln",
+    "word_category": "w",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 33,
+  "fields": {
+    "word": "Walken",
+    "word_category": "w",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 34,
+  "fields": {
+    "word": "Wandern",
+    "word_category": "w",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 35,
+  "fields": {
+    "word": "Wedeln",
+    "word_category": "w",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 36,
+  "fields": {
+    "word": "Wichsen",
+    "word_category": "w",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 37,
+  "fields": {
+    "word": "Wahrsagen",
+    "word_category": "w",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 38,
+  "fields": {
+    "word": "Wegblasen",
+    "word_category": "w",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 39,
+  "fields": {
+    "word": "Wanken",
+    "word_category": "w",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 40,
+  "fields": {
+    "word": "Torkeln",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 41,
+  "fields": {
+    "word": "Ficken",
+    "word_category": "f",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 42,
+  "fields": {
+    "word": "Trinken",
+    "word_category": "t",
+    "safe_for_work": true
   }
 },
 {
