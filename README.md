@@ -13,6 +13,7 @@ pip install -r requirements.txt
 
 ### create the database
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
@@ -25,4 +26,3 @@ python manage.py loaddata db.json
 ```bash
 python manage.py runserver
 ```
-
