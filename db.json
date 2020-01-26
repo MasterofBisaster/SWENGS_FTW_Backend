@@ -105,6 +105,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "dchlo52s0r7tg1trt9x8hjjfvbb0xcg2",
+  "fields": {
+    "session_data": "YTVjZTdkNjE5NjBmNTA3OGVkNTZkYzk2YmZkMWQ4MGMxY2FkZWFiYjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYjNiNjUzNTdlYWU4MTM2YWIyMjYyMzM3NWZiOGNjN2M3ZjYxODYzIn0=",
+    "expire_date": "2020-02-09T16:45:40.414Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "ktg4lunc7hjjdgqlcui9vwl2orjvud8s",
   "fields": {
     "session_data": "ZmUyMWE4ZjdmNzRmNTNkM2FmNzQyMWQ0MDdlZjJmMDU2Mzg3MDg0MDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhMGUzMWQyZjM5MzczY2RlZDhmYWQ2M2RjM2RmMGQ5M2Q4ZjMwZDFhIn0=",
@@ -945,6 +953,24 @@
   "pk": 40,
   "fields": {
     "word": "Torkeln",
+    "word_category": "t",
+    "safe_for_work": true
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 41,
+  "fields": {
+    "word": "Ficken",
+    "word_category": "f",
+    "safe_for_work": false
+  }
+},
+{
+  "model": "ftw.ftwword",
+  "pk": 42,
+  "fields": {
+    "word": "Trinken",
     "word_category": "t",
     "safe_for_work": true
   }
@@ -2603,7 +2629,7 @@
   "model": "admin.logentry",
   "pk": 11,
   "fields": {
-    "action_time": "2020-01-26T10:56:16.000Z",
+    "action_time": "2020-01-26T10:56:16Z",
     "user": 1,
     "content_type": 11,
     "object_id": "13",
@@ -3949,6 +3975,32 @@
     "object_repr": "Wedeln",
     "action_flag": 2,
     "change_message": "[{\"changed\": {\"fields\": [\"Safe for work\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2020-01-26T17:23:56.185Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "41",
+    "object_repr": "Ficken",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 116,
+  "fields": {
+    "action_time": "2020-01-26T17:24:03.202Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "42",
+    "object_repr": "Trinken",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 }
 ]
